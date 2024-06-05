@@ -1,5 +1,3 @@
-import styles from "./Card.module.css";
-
 /**
  * Компонент карточка
  * @property {string} props.title - Название карточки
@@ -11,18 +9,27 @@ import styles from "./Card.module.css";
  * @returns {JSX.Element} Элемент JSX
  */
 export const Card = (props) => {
-  const { title, category, description, price, rating, imgSrc } = props.details;
+  const { title, category, description, price, imgSrc } = props.details;
 
   return (
-    <div className={styles.card}>
-      <div className={styles.card_image}>
-        <img src={imgSrc} alt={title} />
+    <div className="max-w-80 rounded-md overflow-hidden shadow-md hover:shadow-lg mb-4">
+      <div className="relative">
+        <img className="w-full max-h-44" src={imgSrc} alt={title} />
+        <div className="absolute top-0 right-0 bg-red-500 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
+          SALE
+        </div>
       </div>
-      <h3 className={styles.card_title}>{title}</h3>
-      <p className={styles.card_category}>{category}</p>
-      <p className={styles.card_description}>{description}</p>
-      <p className={styles.card_price}>{price}</p>
-      <p className={styles.card_rating}>Rating: {rating}/5</p>
+      <div className="p-4">
+        <h3 className="text-lg font-medium mb-2">{title}</h3>
+        <p className="text-gray-600 text-sm mb-4">{description}</p>
+        <p className="text-gray-600 text-sm mb-4">{category}</p>
+        <div className="flex items-center justify-between">
+          <span className="font-bold text-lg">{price}</span>
+          <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+            Buy Now
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
