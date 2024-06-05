@@ -66,13 +66,21 @@ const initialProducts = [
 ];
 
 function App() {
+  const logCardId = (id) => {
+    console.log("Clicked card:", id);
+  };
+
   return (
     <section className="products">
       <div className="container">
         <div className="flex flex-wrap justify-between">
           {!!initialProducts &&
             initialProducts.map((product) => (
-              <Card key={product?.id} details={product} />
+              <Card
+                onClick={() => logCardId(product?.id)}
+                key={product?.id}
+                details={product}
+              />
             ))}
         </div>
       </div>

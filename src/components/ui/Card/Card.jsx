@@ -1,18 +1,29 @@
 /**
  * Компонент карточка
- * @property {string} props.title - Название карточки
- * @property {string} props.category - Категория карточки
- * @property {string} props.description - Описание карточки
- * @property {string} props.price - Цена карточки
- * @property {number} props.rating - Рейтинг карточки
- * @property {string} props.imgSrc - Путь к изображению
+ * @param {object} props - Свойства компонента
+ * @param {string} props.details.id - ID карточки
+ * @param {string} props.details.title - Название карточки
+ * @param {string} props.details.category - Категория карточки (необязательный)
+ * @param {string} props.details.description - Описание карточки (необязательный)
+ * @param {string} [props.details.price] - Цена карточки (необязательный)
+ * @param {number} [props.details.rating] - Рейтинг карточки (необязательный)
+ * @param {string} props.details.imgSrc - Путь к изображению
  * @returns {JSX.Element} Элемент JSX
  */
 export const Card = (props) => {
-  const { title, category, description, price, imgSrc } = props.details;
+  const { id, title, category, description, price, imgSrc } = props.details;
+  const { onClick } = props;
+
+  // Обработчик клика по карточке для передачи id родителю
+  const handleCardClick = () => {
+    onClick(id);
+  };
 
   return (
-    <div className="max-w-80 rounded-md overflow-hidden shadow-md hover:shadow-lg mb-4">
+    <div
+      onClick={handleCardClick}
+      className="max-w-80 rounded-md overflow-hidden shadow-md hover:shadow-lg mb-4"
+    >
       <div className="relative">
         <img className="w-full max-h-44" src={imgSrc} alt={title} />
         <div className="absolute top-0 right-0 bg-red-500 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
