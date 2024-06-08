@@ -1,5 +1,7 @@
 import "./App.css";
+import { Haeder } from "./components/haeder/haeder";
 import { Card } from "./components/ui/Card/Card";
+
 
 // Данные карточек (продукты)
 const initialProducts = [
@@ -67,6 +69,8 @@ const initialProducts = [
 
 function App() {
   return (
+    <>
+    <Haeder/>
     <section className="products">
       <div className="container">
         <div className="flex flex-wrap justify-between">
@@ -77,6 +81,7 @@ function App() {
         </div>
       </div>
     </section>
+    </>
   );
 }
 
