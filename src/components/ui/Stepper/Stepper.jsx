@@ -5,10 +5,16 @@ import { useState } from "react";
  * @param {object} props - Свойства компонента.
  * @param {string} [props.minValue = 1] - Минимальное значение.
  * @param {string} [props.maxValue = 10] - Максимальное значение.
+ * @param {number} [props.step = 1] - Шаг изменения значения.
  * @param {function} props.onQuantityUpdate - Функция коллбек для передачи данных родителю.
  * @returns {JSX.Element} Элемент JSX.
  */
-export const Stepper = ({ minValue = 1, maxValue = 10, onQuantityUpdate }) => {
+export const Stepper = ({
+  minValue = 1,
+  maxValue = 10,
+  step = 1,
+  onQuantityUpdate,
+}) => {
   // Стейт для увеличения/уменьшения значения в компоненте.
   const [value, setValue] = useState(minValue);
 
@@ -16,10 +22,10 @@ export const Stepper = ({ minValue = 1, maxValue = 10, onQuantityUpdate }) => {
    * Обработчик увеличения значения
    */
   const handleBtnIncrement = () => {
-    if (value < maxValue) {
-      setValue(value + 1);
+    if (value + step <= maxValue) {
+      setValue(value + step);
 
-      onQuantityUpdate && onQuantityUpdate(value + 1);
+      onQuantityUpdate && onQuantityUpdate(value + step);
     }
   };
 
@@ -27,10 +33,10 @@ export const Stepper = ({ minValue = 1, maxValue = 10, onQuantityUpdate }) => {
    * Обработчик уменьшения значения
    */
   const handleBtnDecrement = () => {
-    if (value > minValue) {
-      setValue(value - 1);
+    if (value - step >= minValue) {
+      setValue(value - step);
 
-      onQuantityUpdate && onQuantityUpdate(value - 1);
+      onQuantityUpdate && onQuantityUpdate(value - step);
     }
   };
 
@@ -44,9 +50,15 @@ export const Stepper = ({ minValue = 1, maxValue = 10, onQuantityUpdate }) => {
       >
         -
       </button>
-      <span className="inline-flex items-center w-10 h-10 px-4 py-2 text-gray-600 text-sm pointer-events-none">
-        {value}
-      </span>
+      <input
+        type="number"
+        value={value}
+        min={minValue}
+        max={maxValue}
+        readOnly
+        style={{ MozAppearance: "textfield" }}
+        className="w-10 h-10 text-center border-0 bg-gray-200 pointer-events-none focus:outline-none rounded-none appearance-none"
+      />
       <button
         onClick={handleBtnIncrement}
         disabled={value === 10}
