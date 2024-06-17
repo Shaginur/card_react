@@ -1,4 +1,3 @@
-import "./App.css";
 import { Card } from "./components/ui/Card/Card";
 import { initialProducts } from "../data";
 import { useState } from "react";
