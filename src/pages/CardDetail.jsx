@@ -3,6 +3,7 @@ import useProductsStore from "../store/useProductsStore";
 import { Link } from "react-router-dom";
 
 const CardDetail = () => {
+  // Получение id из адресной строки через React-router-dom
   const { id } = useParams();
 
   // Стор для работы с продуктами
