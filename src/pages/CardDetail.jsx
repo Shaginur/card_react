@@ -1,15 +1,15 @@
 import { useParams } from "react-router-dom";
-import useProductsStore from "../store/useProductsStore.js";
+import useProductsStore from "../store/useProductsStore";
 import { Link } from "react-router-dom";
 
 const CardDetail = () => {
   const { id } = useParams();
 
   // Стор для работы с продуктами
-  const { products, setFavorite } = useProductsStore();
+  const { getProductById, setFavorite } = useProductsStore();
 
   // Находим карточку по id.
-  const product = products?.find((product) => product?.id === id);
+  const product = getProductById(id);
 
   return (
     <section className="card-details">
@@ -21,7 +21,14 @@ const CardDetail = () => {
           Вернуться назад
         </Link>
         <div className="max-w-md rounded shadow-lg relative">
-          <img className="w-full " src={product?.imgSrc} alt={product?.title} />
+          <div className="relative">
+            <div className="absolute inset-0 bg-black opacity-30 rounded"></div>
+            <img
+              className="w-full rounded"
+              src={product?.imgSrc}
+              alt={product?.title}
+            />
+          </div>
 
           <button
             className={`absolute top-0 left-0 m-2 p-2 rounded-full ${
