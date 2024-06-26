@@ -27,16 +27,29 @@ export const Card = (props) => {
 
   const { onCardClick, onToggleFavorite } = props;
 
+  console.log("onCardClick", onCardClick);
+
   // Обработчик клика на иконку сердечка
   const handleFavorite = (event) => {
     event.stopPropagation(); // Предотвр. всплытие события
 
-    onToggleFavorite && onToggleFavorite(id);
+    if (onToggleFavorite) {
+      onToggleFavorite(id);
+    }
   };
 
   // Обработчик клика по карточке
+  // const handleCardClick = () => {
+  //   onCardClick && onCardClick(id); // ?? Клик все равно срабатывает
+  //   console.log('Клик выполнен!')
+  // };
+
+  // Обработчик клика по карточке
   const handleCardClick = () => {
-    onCardClick && onCardClick(id);
+    if (onCardClick) {
+      onCardClick(id);
+      console.log("Клик выполнен!");
+    }
   };
 
   return (
